@@ -4,7 +4,7 @@ sistema possui uma interface gráfica (GUI) para interação com o usuário e se
 
 ## 🚀 Começando
 
-A implementação inclui um progr  
+A implementação possui uma interface GUI, utilizando os métodos CRUD aprendidos durante o semestre. Tendo um vasto banco de dados com inúmeros itens já cadastrados no banco, A interface está bem intuitiva, simples de entender, então é possível somente rodar o programa e já começar a inserir informações.
 
 ### Funcionalidades
 
