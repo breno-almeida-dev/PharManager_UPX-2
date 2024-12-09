@@ -6,11 +6,22 @@ import br.com.dataflow.pharmanager.controller.MedicamentoController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Painel para exclusão de medicamentos.
+ * 
+ * Esta classe fornece uma interface gráfica para que o usuário exclua medicamentos do sistema,
+ * informando o ID do medicamento a ser excluído.
+ */
 public class PanelExcluirMedicamento extends JPanel {
 
     private MedicamentoController controller;
     private JTextField txtId;
 
+    /**
+     * Construtor da classe PanelExcluirMedicamento.
+     * 
+     * @param entityManager O EntityManager utilizado para gerenciar a conexão com o banco de dados.
+     */
     public PanelExcluirMedicamento(EntityManager entityManager) {
         this.controller = new MedicamentoController(entityManager);
         setLayout(null);
@@ -35,6 +46,12 @@ public class PanelExcluirMedicamento extends JPanel {
         });
     }
 
+    /**
+     * Exclui um medicamento com base no ID informado.
+     * 
+     * Este método é acionado quando o botão de exclusão é pressionado. 
+     * Ele valida o ID fornecido, realiza a exclusão e exibe mensagens apropriadas.
+     */
     private void excluirMedicamento() {
         try {
             Long id = Long.parseLong(txtId.getText().trim());

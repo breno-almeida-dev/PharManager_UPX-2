@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Painel para listar medicamentos com estoque abaixo de um limite especificado.
+ * 
+ * Esta classe fornece uma interface gráfica que permite ao usuário listar medicamentos
+ * cujo estoque está abaixo de um determinado limite informado.
+ */
 public class PanelListarEstoqueBaixo extends JPanel {
 
     private MedicamentoController controller;
@@ -16,6 +22,11 @@ public class PanelListarEstoqueBaixo extends JPanel {
     private DefaultTableModel model;
     private JTextField txtLimite;
 
+    /**
+     * Construtor da classe PanelListarEstoqueBaixo.
+     * 
+     * @param entityManager O EntityManager utilizado para gerenciar a conexão com o banco de dados.
+     */
     public PanelListarEstoqueBaixo(EntityManager entityManager) {
         this.controller = new MedicamentoController(entityManager);
         setLayout(null);
@@ -46,6 +57,12 @@ public class PanelListarEstoqueBaixo extends JPanel {
         });
     }
 
+    /**
+     * Lista medicamentos cujo estoque está abaixo do limite especificado.
+     * 
+     * Este método é acionado quando o botão "Listar Estoque Baixo" é pressionado.
+     * Ele valida o limite informado, busca os medicamentos e exibe os resultados em uma tabela.
+     */
     private void listarEstoqueBaixo() {
         model.setRowCount(0);
         try {

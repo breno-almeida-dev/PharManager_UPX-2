@@ -8,12 +8,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Painel para busca de medicamentos.
+ * 
+ * Esta classe fornece uma interface gráfica para buscar e exibir os dados de medicamentos no sistema.
+ * O usuário pode inserir o ID de um medicamento para visualizar seus atributos detalhados.
+ */
 public class PanelBuscarMedicamento extends JPanel {
 
     private MedicamentoController controller;
     private JTextField txtId;
     private JTextArea txtResultado;
 
+    /**
+     * Construtor da classe PanelBuscarMedicamento.
+     * 
+     * @param entityManager O EntityManager utilizado para gerenciar a conexão com o banco de dados.
+     */
     public PanelBuscarMedicamento(EntityManager entityManager) {
         this.controller = new MedicamentoController(entityManager);
         setLayout(null);
@@ -44,6 +55,12 @@ public class PanelBuscarMedicamento extends JPanel {
         });
     }
 
+    /**
+     * Realiza a busca de um medicamento pelo ID informado.
+     * 
+     * Exibe os dados do medicamento em um painel de texto caso ele seja encontrado.
+     * Caso o ID seja inválido ou o medicamento não seja encontrado, exibe mensagens de erro apropriadas.
+     */
     private void buscarMedicamento() {
         try {
             Long id = Long.parseLong(txtId.getText().trim());

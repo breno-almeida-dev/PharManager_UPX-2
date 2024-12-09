@@ -9,13 +9,16 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Painel para inserir novos medicamentos.
+ * 
+ * Esta classe fornece uma interface gráfica para inserir as informações de um novo medicamento no sistema.
+ * Permite a seleção do tipo de medicamento e ajusta os campos do formulário de acordo com o tipo selecionado.
+ */
 public class PanelInserirMedicamento extends JPanel {
 
-    // Campos comuns
     private JTextField txtNome, txtCategoria, txtComposicao, txtDosagem, txtViaAdministracao, txtQuantidade,
             txtFabricante, txtDataFabricacao, txtDataValidade, txtEfeitosColaterais, txtIndicacao;
-
-    // Campos específicos
     private JTextField txtTipoDor, txtAtuacao; // Analgésico
     private JTextField txtEspectroDeAcao, txtTipoBacteriaAlvo, txtResistenciaBacteriana; // Antibiótico
     private JTextField txtTipo_AntiInflamatorio, txtFinalidade_AntiInflamatorio; // Anti-inflamatório
@@ -30,6 +33,12 @@ public class PanelInserirMedicamento extends JPanel {
     private String tipoSelecionado;
     private MedicamentoController controller;
 
+    /**
+     * Construtor da classe PanelInserirMedicamento.
+     * 
+     * @param tipoSelecionado O tipo de medicamento a ser inserido, utilizado para ajustar os campos específicos do formulário.
+     * @param entityManager O EntityManager utilizado para gerenciar a conexão com o banco de dados.
+     */
     public PanelInserirMedicamento(String tipoSelecionado, EntityManager entityManager) {
         this.tipoSelecionado = tipoSelecionado;
         this.controller = new MedicamentoController(entityManager);
@@ -37,6 +46,12 @@ public class PanelInserirMedicamento extends JPanel {
         criarFormulario();
     }
 
+    /**
+     * Cria o formulário de entrada de dados do medicamento.
+     * 
+     * O formulário inclui campos comuns a todos os medicamentos, bem como campos específicos 
+     * que variam de acordo com o tipo de medicamento selecionado.
+     */
     private void criarFormulario() {
         int y = 20;
         int labelWidth = 200;
@@ -159,7 +174,6 @@ public class PanelInserirMedicamento extends JPanel {
 
         int yTipo = y; 
 
-     // Ajuste dos campos específicos conforme o tipo selecionado
         if (tipoSelecionado.equals("Analgésico")) {
             JLabel lblTipoDor = new JLabel("Tipo de dor:");
             lblTipoDor.setBounds(20, yTipo, 200, 25);
@@ -383,6 +397,12 @@ public class PanelInserirMedicamento extends JPanel {
         });
     }
 
+    /**
+     * Lida com a ação de salvar o medicamento.
+     * 
+     * Valida os dados inseridos pelo usuário, cria um objeto do tipo de medicamento apropriado
+     * e chama o controlador para salvar o medicamento no banco de dados.
+     */
     private void salvarMedicamento() {
         try {
             String nome = txtNome.getText();
@@ -475,8 +495,8 @@ public class PanelInserirMedicamento extends JPanel {
             } else {
                 throw new IllegalArgumentException("Tipo de medicamento não implementado!");
             }
-
             controller.salvar(medicamento);
+            
             JOptionPane.showMessageDialog(this, "Medicamento salvo com sucesso!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao processar os dados: " + ex.getMessage());

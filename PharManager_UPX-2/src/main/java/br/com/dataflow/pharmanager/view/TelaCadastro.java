@@ -11,6 +11,17 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Tela de cadastro para criação de novos usuários.
+ * 
+ * Esta classe representa a interface gráfica para registrar novos usuários
+ * no sistema. Os dados do novo usuário (nome, usuário e senha) são salvos
+ * no banco de dados.
+ * 
+ * Funcionalidades principais:
+ * - Registro de novos usuários.
+ * - Integração com a tela de login para atualização do estado após o cadastro.
+ */
 public class TelaCadastro extends JFrame {
     private JTextField txtNome, txtUsuario;
     private JPasswordField txtSenha;
@@ -19,6 +30,12 @@ public class TelaCadastro extends JFrame {
     private EntityManager entityManager;
     private UsuarioRepository usuarioRepository;
 
+    /**
+     * Construtor da classe TelaCadastro.
+     * 
+     * @param telaLogin Referência para a tela de login, permitindo comunicação entre as telas.
+     * @param entityManager EntityManager para gerenciar a persistência de dados.
+     */
     public TelaCadastro(TelaLogin telaLogin, EntityManager entityManager) {
         this.telaLogin = telaLogin;
         this.entityManager = entityManager;
@@ -67,6 +84,12 @@ public class TelaCadastro extends JFrame {
         centralizarTela();
     }
 
+    /**
+     * Realiza o processo de cadastro de um novo usuário.
+     * 
+     * Valida os campos de entrada (nome, usuário e senha) e salva os dados
+     * no banco de dados. Exibe mensagens informativas em caso de sucesso ou erro.
+     */
     private void cadastrarUsuario() {
         String nome = txtNome.getText().trim();
         String usuarioStr = txtUsuario.getText().trim();
@@ -89,6 +112,11 @@ public class TelaCadastro extends JFrame {
         }
     }
 
+    /**
+     * Centraliza a janela na tela do monitor.
+     * 
+     * O posicionamento da janela é calculado com base nas dimensões da tela.
+     */
     private void centralizarTela() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();

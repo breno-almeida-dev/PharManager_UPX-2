@@ -5,23 +5,60 @@ import br.com.dataflow.pharmanager.repository.MedicamentoRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 
+/**
+ * Controlador para gerenciar operações relacionadas a Medicamentos.
+ * Fornece métodos para salvar, excluir, buscar e listar medicamentos,
+ * bem como para filtrar por categoria, validade e estoque.
+ */
 public class MedicamentoController {
 
     private final MedicamentoRepository medicamentoRepository;
 
+    /**
+     * Construtor do MedicamentoController.
+     *
+     * @param entityManager O EntityManager para gerenciar entidades.
+     */
     public MedicamentoController(EntityManager entityManager) {
         this.medicamentoRepository = new MedicamentoRepository(entityManager);
     }
 
-    // Método para salvar um medicamento (já existia)
+    /**
+     * Salva um novo medicamento no repositório.
+     *
+     * @param medicamento O medicamento a ser salvo.
+     * @throws Exception Se o medicamento for nulo ou ocorrer um erro durante a persistência.
+     */
     public void salvar(Medicamento medicamento) throws Exception {
         if (medicamento == null) {
             throw new IllegalArgumentException("O medicamento não pode ser nulo.");
         }
         medicamentoRepository.salvar(medicamento);
     }
+    
+    /**
+     * Atualiza um medicamento existente com base no ID.
+     *
+     * @param id O ID do medicamento a ser atualizado.
+     * @param medicamento Os novos dados do medicamento.
+     * @throws Exception Se o medicamento for nulo, o ID for inválido, ou ocorrer um erro durante a atualização.
+     */
+    public void atualizar(Long id, Medicamento medicamento) throws Exception {
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("O ID do medicamento deve ser válido.");
+        }
+        if (medicamento == null) {
+            throw new IllegalArgumentException("O medicamento não pode ser nulo.");
+        }
+        medicamentoRepository.atualizar(id, medicamento);
+    }
 
-    // Método para excluir um medicamento (já existia)
+    /**
+     * Exclui um medicamento do repositório com base no ID fornecido.
+     *
+     * @param id O ID do medicamento a ser excluído.
+     * @throws Exception Se o ID for inválido ou ocorrer um erro durante a exclusão.
+     */
     public void excluir(Long id) throws Exception {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("ID inválido para exclusão.");
@@ -29,7 +66,13 @@ public class MedicamentoController {
         medicamentoRepository.excluir(id);
     }
 
-    // Método para buscar um medicamento pelo ID (já existia)
+    /**
+     * Busca um medicamento no repositório com base no ID fornecido.
+     *
+     * @param id O ID do medicamento a ser buscado.
+     * @return O medicamento encontrado.
+     * @throws Exception Se o ID for inválido ou o medicamento não for encontrado.
+     */
     public Medicamento buscarPorId(Long id) throws Exception {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("ID inválido para busca.");
@@ -41,12 +84,22 @@ public class MedicamentoController {
         return medicamento;
     }
 
-    // Método para listar todos os medicamentos (já existia)
+    /**
+     * Lista todos os medicamentos presentes no repositório.
+     *
+     * @return Uma lista de todos os medicamentos.
+     */
     public List<Medicamento> listar() {
         return medicamentoRepository.listarTodos();
     }
 
-    // Novo: listar por categoria
+    /**
+     * Lista os medicamentos que pertencem à categoria especificada.
+     *
+     * @param categoria A categoria dos medicamentos a serem listados.
+     * @return Uma lista de medicamentos da categoria especificada.
+     * @throws IllegalArgumentException Se a categoria for nula ou vazia.
+     */
     public List<Medicamento> listarPorCategoria(String categoria) {
         if (categoria == null || categoria.isBlank()) {
             throw new IllegalArgumentException("Categoria inválida.");
@@ -54,17 +107,33 @@ public class MedicamentoController {
         return medicamentoRepository.listarPorCategoria(categoria);
     }
 
-    // Novo: listar medicamentos próximos do vencimento (2 meses ~ 60 dias)
-    public List<Medicamento> listarProximosVencimento() {
-        return medicamentoRepository.listarProximosDoVencimento(60); // 60 dias de margem
+    /**
+     * Lista os medicamentos que estão próximos do vencimento, dentro de um período especificado.
+     * Apenas medicamentos que ainda não estão vencidos serão retornados.
+     *
+     * @param dias Número de dias a partir da data atual para considerar como próximo do vencimento.
+     * @return Lista de medicamentos que estão próximos ao vencimento.
+     */
+    public List<Medicamento> listarProximosVencimento(int dias) {
+        return medicamentoRepository.listarProximosDoVencimento(dias);
     }
 
-    // Novo: listar medicamentos já vencidos
+    /**
+     * Lista os medicamentos que já estão vencidos.
+     *
+     * @return Lista de medicamentos já vencidos.
+     */
     public List<Medicamento> listarVencidos() {
         return medicamentoRepository.listarVencidos(); 
     }
 
-    // Novo: listar medicamentos com estoque abaixo de um determinado limite
+    /**
+     * Lista os medicamentos cujo estoque está abaixo de um determinado limite.
+     *
+     * @param limite O limite mínimo de estoque.
+     * @return Lista de medicamentos com estoque abaixo do limite especificado.
+     * @throws IllegalArgumentException Se o limite for menor ou igual a zero.
+     */
     public List<Medicamento> listarPorEstoqueBaixo(int limite) {
         if (limite <= 0) {
             throw new IllegalArgumentException("Limite inválido.");

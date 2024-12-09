@@ -9,12 +9,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Painel para listar medicamentos vencidos.
+ * 
+ * Esta classe fornece uma interface gráfica que permite ao usuário visualizar
+ * todos os medicamentos cujo prazo de validade já expirou.
+ */
 public class PanelListarVencidos extends JPanel {
 
     private MedicamentoController controller;
     private JTable tabela;
     private DefaultTableModel model;
 
+    /**
+     * Construtor da classe PanelListarVencidos.
+     * 
+     * @param entityManager O EntityManager utilizado para gerenciar a conexão com o banco de dados.
+     */
     public PanelListarVencidos(EntityManager entityManager) {
         this.controller = new MedicamentoController(entityManager);
         setLayout(null);
@@ -37,6 +48,12 @@ public class PanelListarVencidos extends JPanel {
         });
     }
 
+    /**
+     * Lista os medicamentos que já estão vencidos.
+     * 
+     * Este método consulta o controlador para buscar os medicamentos vencidos
+     * e os exibe na tabela presente no painel.
+     */
     private void listarVencidos() {
         model.setRowCount(0);
         List<Medicamento> meds = controller.listarVencidos();
