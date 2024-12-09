@@ -26,10 +26,10 @@ A implementação inclui um progr
 O programa inclui uma interface gráfica intuitiva que permite ao usuário acessar e manipular os dados facilmente. A GUI contém formulários para preenchimento dos atributos obrigatórios e específicos de cada tipo de medicamento, além de filtros para consultas.
 ## Funcionamento do programa:
 
-##JAVADOC:
+**JAVADOC:**
 ![Imagem do JAVADOC](https://github.com/breno-almeida-dev/PharManager_UPX-2/blob/master/JAVADOC-PharManager.png)
 
-##BANCO DE DADOS
+**BANCO DE DADOS:**
 ![Imagem do banco de dados](https://github.com/breno-almeida-dev/PharManager_UPX-2/blob/master/PharManager-DB.png)
 
 
