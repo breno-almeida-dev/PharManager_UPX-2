@@ -69,7 +69,7 @@ Ferramentas e bibliotecas utilizadas no projeto:
 
 
 ✒️ Autores:
-    **Breno Almeida**
-    **Edson Veiga**
-    **Matheus Leone**
-    **Lucas Yoshida**
+   - **Breno Almeida**
+   - **Edson Veiga**
+   - **Matheus Leone**
+   - **Lucas Yoshida**
